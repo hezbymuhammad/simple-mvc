@@ -10,6 +10,6 @@ final class Security{
 		return base64_decode($string);
 	}
 	public static function show_404(){
-		echo '404';
+		header('Location: /framework/404.php');
 	}
 }

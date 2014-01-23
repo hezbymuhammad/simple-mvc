@@ -1,4 +1,5 @@
 <?php 
 require_once 'sys/init.php';
-${__CONTROLLER__}->index();
+$main->index();
+require_once 'sys/destruct.php';
 ?>

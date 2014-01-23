@@ -11,7 +11,14 @@ abstract class Controller{
 	
 	public function __construct(){
 	}
-	
+	public function __destruct(){
+		foreach ($this->class as $value) {
+			unset($value);
+		}
+	}
+	public function __call($name, $arguments){
+		Security::show_404();
+	}
 	public function controller($name){
 		require __BASEPATH__.'/controller/'.$name.'.php';
 		$this->class[$name] = new $name();
@@ -23,8 +30,10 @@ abstract class Controller{
 	}
 	
 	public function view($filename, $data=null){
-		foreach ($data as $key=>$val){
-			${$key}=$val;
+		if(!empty($data)){
+			foreach ($data as $key=>$val){
+				${$key}=$val;
+			}
 		}
 		require __BASEPATH__.'/view/'.$filename.'.php';
 	}
